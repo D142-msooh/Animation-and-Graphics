@@ -1,0 +1,72 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: bisque;
+  background: blue;
+  text-align: center;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: burlywood;
+  padding: 10px;
+  z-index: 10;
+}
+
+nav a {
+  margin: 0 15px;
+  color: bisque;
+  text-decoration: none;
+}
+
+section {
+  min-height: 100vh;
+  padding: 100px 20px;
+}
+
+.Graphics-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  width: 150px;
+  height: 100px;
+  background: blueviolet;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .3s;
+}
+
+.card:hover {
+  transform: scale(1.1);
+  background: goldenrod;
+}
+
+/* Notes App */
+#notes-list {
+  list-style: none;
+  padding: 0;
+}
+
+#notes-list li {
+  background: blueviolet;
+  margin: 5px auto;
+  padding: 10px;
+  width: 60%;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#particle-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -1;
+}
