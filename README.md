@@ -15,7 +15,7 @@ We built a **Particle Galaxy** with:
 - Project by: Damaris Kinyanjui.
 
 ## Demo
-- Frontend (Netlify): [Live Link Here]  
+- Frontend (Netlify): https://app.netlify.com/projects/stirring-otter-b1dca8/overview  
 - Backend (Render): [API Endpoint Here]
 
 ## Problems Faced
