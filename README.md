@@ -15,8 +15,8 @@ We built a **Particle Galaxy** with:
 - Project by: Damaris Kinyanjui.
 
 ## Demo
-- Frontend (Netlify): https://68d6225b186568000861f784--stirring-otter-b1dca8.netlify.app/  
-- Backend (Render): https://animation-api.onrender.com
+- Frontend (Netlify): https://app.netlify.com/projects/animation-and-graphics/deploys/68d682dd3e461c0e5851ce8d
+- Backend (Render): https://animation-api.onrender.com/notes
 
 ## Problems Faced
 - Learning how to connect frontend to backend APIs.  

@@ -38,13 +38,13 @@ function animate() {
 }
 animate();
 
-const API_URL = "https://animation-api.onrender.com";
+const API_URL = "https://animation-api.onrender.com/notes";
 const noteForm = document.getElementById("note-form");
 const noteInput = document.getElementById("note-input");
 const notesList = document.getElementById("notes-list");
 
 function loadNotes() {
-  fetch(API_URL)
+  fetch("https://animation-api.onrender.com/notes")
     .then(res => res.json())
     .then(data => {
       notesList.innerHTML = "";
@@ -62,7 +62,7 @@ function renderNote(note) {
   editBtn.onclick = () => {
     const newText = prompt("Edit note:", note.text);
     if (newText) {
-      fetch(`${API_URL}/${note.id}`, {
+      fetch(`${"https://animation-api.onrender.com/notes"}/${note.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: newText })
@@ -77,7 +77,7 @@ function renderNote(note) {
 noteForm.addEventListener("submit", e => {
   e.preventDefault();
   const newNote = { text: noteInput.value };
-  fetch(API_URL, {
+  fetch("https://animation-api.onrender.com/notes", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newNote)
