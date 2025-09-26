@@ -1,43 +1,29 @@
-# Animation-and-Graphics# remote-for-Animation-and-graphics
-# remote-for-Animation-and-graphics
-This is a simple interactive website project that demonstrates basic **HTML**, **CSS**, and **JavaScript** concepts.  
-The project was built with beginner-friendly code to practice web development skills.
+# Interactive Particle Galaxy
 
-## Features
+## Problem Statement
+Many websites are lack interactive, visually appealing elements.  
+This project explores how **HTML, CSS, and JavaScript** can create an engaging galaxy animation while also including a notes app for interactivity.
 
-1. **Particle Galaxy Animation**
-   - A moving particle effect displayed on a canvas.
-   - Uses JavaScript and animation functions.
+## Solution
+We built a **Particle Galaxy** with:
+- Animated galaxy using `<canvas>`  
+- Interactive graphics shuffle section  
+- Digital clock  
+- Notes app connected to a backend (Render JSON server) using `fetch`, `POST`, and `PATCH`.  
 
-2. **Digital Clock**
-   - Shows the current time.
-   - Updates every second using `setInterval`.
+## Team
+- Project by: Damaris Kinyanjui.
 
-3. **Graphics Section**
-   - Contains several animated images.
-   - Images are hidden by default and displayed (only when the button is clicked**).
+## Demo
+- Frontend (Netlify): [Live Link Here]  
+- Backend (Render): [API Endpoint Here]
 
-4. **Notes App**
-   - Lets you add, edit, and view notes.
-   - Uses a local `db.json` with **JSON Server** to store notes.
-   - Demonstrates `fetch()`, `POST`, and `PATCH` requests.
+## Problems Faced
+- Learning how to connect frontend to backend APIs.  
+- Using `fetch`, `POST`, and `PATCH` has been alot tough for me.
+- Deploying JSON server on Render.
 
-## How to Run the Project
-
-1. **Clone** this project to your folder/repository.  
-
-2. Open the project folder in your editor (VS Code) by use of **code .**
-
-3. Open `index.html` in your browser to view the website.
-
-4. For the **Notes app** to work:
-   - Install **JSON Server** locally:
-     npm install -g json-server
-   - Create a `db.json` file in the project folder with the following content:
-     {
-       "notes": []
-     }
-   - Start the server:
-     json-server --watch db.json --port 3000
-
-   - The app will now fetch and save notes at `http://localhost:3000/notes`.
+## Future Plans
+- Add galaxy color modes (neon,dark).  
+- Add background music.  
+- Export animations as GIFs.  
