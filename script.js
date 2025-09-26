@@ -1,65 +1,89 @@
-const steps = [
-  { img: "images/step1.jpg", caption: "Step 1: Heat from magma beneath the Earth's surface heats underground water." },
-  { img: "images/step2.jpg", caption: "Step 2: The hot water turns into steam and rises through wells." },
-  { img: "images/step3.jpg", caption: "Step 3: The steam spins a turbine connected to a generator." },
-  { img: "images/step4.jpg", caption: "Step 4: The generator produces electricity which is sent to power lines." }
-];
+function updateClock() {
+  const clock = document.getElementById("digital-clock");
+  const now = new Date();
+  clock.textContent = now.toLocaleTimeString();
+}
+setInterval(updateClock, 1000);
+updateClock();
 
-function showStep(stepNumber) {
-  const step = steps[stepNumber - 1];
-  document.getElementById("stepImage").src = step.img;
-  document.getElementById("caption").innerText = step.caption;
+const canvas = document.getElementById("particle-canvas");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+for (let i = 0; i < 50; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    dx: (Math.random() - 0.5) * 2,
+    dy: (Math.random() - 0.5) * 2,
+    radius: 2
+  });
 }
 
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.fillStyle = "white";
+    ctx.fill();
+    p.x += p.dx;
+    p.y += p.dy;
+    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+  });
+  requestAnimationFrame(animate);
+}
+animate();
 
 const API_URL = "https://animation-api.onrender.com";
+const noteForm = document.getElementById("note-form");
+const noteInput = document.getElementById("note-input");
+const notesList = document.getElementById("notes-list");
 
-const factList = document.getElementById("fact-list");
-const factForm = document.getElementById("fact-form");
-const updateForm = document.getElementById("update-form");
-
-function loadFacts() {
+function loadNotes() {
   fetch(API_URL)
     .then(res => res.json())
     .then(data => {
-      factList.innerHTML = "";
-      data.forEach(fact => {
-        const p = document.createElement("p");
-        p.textContent = `${fact.id}: ${fact.text}`;
-        factList.appendChild(p);
-      });
+      notesList.innerHTML = "";
+      data.forEach(note => renderNote(note));
     });
 }
+loadNotes();
 
-factForm.addEventListener("submit", e => {
+function renderNote(note) {
+  const li = document.createElement("li");
+  li.textContent = note.text;
+
+  const editBtn = document.createElement("button");
+  editBtn.textContent = "Edit";
+  editBtn.onclick = () => {
+    const newText = prompt("Edit note:", note.text);
+    if (newText) {
+      fetch(`${API_URL}/${note.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: newText })
+      }).then(loadNotes);
+    }
+  };
+
+  li.appendChild(editBtn);
+  notesList.appendChild(li);
+}
+
+noteForm.addEventListener("submit", e => {
   e.preventDefault();
-  const text = document.getElementById("fact-text").value;
+  const newNote = { text: noteInput.value };
   fetch(API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text })
+    body: JSON.stringify(newNote)
   })
-  .then(res => res.json())
-  .then(() => {
-    factForm.reset();
-    loadFacts();
-  });
+    .then(() => {
+      noteInput.value = "";
+      loadNotes();
+    });
 });
-
-updateForm.addEventListener("submit", e => {
-  e.preventDefault();
-  const id = document.getElementById("update-id").value;
-  const text = document.getElementById("update-text").value;
-  fetch(`${API_URL}/${id}`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text })
-  })
-  .then(res => res.json())
-  .then(() => {
-    updateForm.reset();
-    loadFacts();
-  });
-});
-
-loadFacts();
